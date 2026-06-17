@@ -18,6 +18,7 @@ docs/maintainer-workflow.md
 examples/codex-pr-review-box.md
 examples/safe-refactor-box.md
 examples/database-readonly-box.md
+examples/safe-refactor-box.md
 prompts/codex-pr-review-box.md
 prompts/safe-refactor-box.md
 templates/codex-maintainer-box-template.md
@@ -25,17 +26,20 @@ templates/codex-maintainer-box-template.md
 .github/ISSUE_TEMPLATE/box-case.md
 .github/pull_request_template.md
 README.md
+FILE_LIST_GH02_v0_2_0.md
 ```
 
 ## Gate checklist
 
 ```text
 public_safe: PASS
-private_handoff_excluded: PASS
-audit_folder_excluded: PASS
+handoff_notes_excluded: PASS
+review_notes_excluded: PASS
 zip_artifacts_excluded: PASS
 branch_target: v0.2.0
 main_branch_unchanged: PASS
+file_list_present: PASS
+hash_ledger_required: false
 readback_required_before_merge: PASS
 ```
 
