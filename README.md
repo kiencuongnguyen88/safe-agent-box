@@ -2,19 +2,19 @@
 
 Vietnamese name: **Hộp chạy an toàn cho AI Agent**
 
-Status: `v0.1.0 / public method seed`
+Status: `v0.2.0 / OSS maintainer kit candidate`
 
-Safe Agent Box is a practical workflow for giving AI agents a clear operating box before they touch real files, code, data, commands, APIs, or automation.
+Safe Agent Box is a practical workflow for giving AI agents a clear operating box before they inspect, draft, edit, run, or report on real repositories and systems.
 
-> Agent càng mạnh thì hộp chạy càng phải rõ.
+> Box first. Run second. Readback before trust.
 
 ---
 
 ## Why this exists
 
-AI agents are no longer only generating text. They can read files, edit repositories, run terminal commands, call APIs, install packages, update databases, send messages, and trigger automations.
+AI agents can help with repository work: reading files, reviewing pull requests, drafting patches, preparing documentation, and supporting maintainer workflows.
 
-That means the main question is not only:
+The key question is not only:
 
 ```text
 Is the agent smart enough?
@@ -32,12 +32,6 @@ Safe Agent Box helps humans and teams define that operating box before execution
 
 ## Core idea
 
-```text
-Box first.
-Run second.
-Readback before trust.
-```
-
 A Safe Agent Box defines:
 
 - the goal;
@@ -46,36 +40,11 @@ A Safe Agent Box defines:
 - allowed paths;
 - blocked paths;
 - allowed commands;
-- blocked commands;
-- secrets policy;
-- dependency policy;
+- commands not allowed;
 - Human Gate triggers;
 - required readback;
-- rollback plan;
+- restore or stop plan;
 - next checkpoint.
-
----
-
-## The loop
-
-```text
-Scope
-→ Permission
-→ Workspace
-→ Action plan
-→ Human Gate
-→ Execution
-→ Readback
-→ Patch / rollback / checkpoint
-```
-
-Compact version:
-
-```text
-Hộp trước.
-Chạy sau.
-Readback rồi mới tin.
-```
 
 ---
 
@@ -88,7 +57,7 @@ Readback rồi mới tin.
 | 2 | Draft changes | Create patch, diff, or candidate files. No source mutation. |
 | 3 | Edit in sandbox | Edit copied workspace, branch, container, or test folder. |
 | 4 | Run checks | Run approved tests, lint, typecheck, or safe commands. |
-| 5 | Controlled execution | Run approved commands/API actions with logs and readback. |
+| 5 | Controlled execution | Run approved commands or API actions with logs and readback. |
 | 6 | Production action | Touch production or real external systems only after explicit approval. |
 
 Recommended default:
@@ -102,23 +71,22 @@ Raise permission only when the box is clear.
 
 ## Human Gate
 
-A Human Gate is needed before the agent performs high-impact actions.
+A Human Gate is needed before high-impact actions.
 
 Examples:
 
-- delete files;
-- write to a database;
-- migrate schema;
-- run destructive commands;
-- call paid APIs;
-- use tokens or keys;
-- push code;
-- deploy;
-- send real messages or emails;
-- publish public content;
-- change source of truth;
-- install unknown packages;
-- run downloaded scripts.
+- removing files;
+- changing persistent data;
+- running broad repository commands;
+- using paid or external services;
+- using private credentials;
+- pushing code;
+- deploying;
+- sending real messages;
+- publishing public content;
+- changing source of truth;
+- adding unfamiliar packages;
+- running downloaded scripts.
 
 Gate shape:
 
@@ -127,55 +95,9 @@ Action:
 Scope:
 Permission level:
 Risk:
-Rollback:
+Restore path:
 Readback:
 Decision needed:
-```
-
----
-
-## Minimal template
-
-Use this before giving an agent access to a real workspace:
-
-```text
-Agent Box Name:
-Project / Repo:
-Goal:
-Current B:
-Workspace:
-Permission Level:
-Allowed paths:
-Blocked paths:
-Allowed commands:
-Blocked commands:
-Secrets policy:
-Dependency policy:
-Human Gate triggers:
-Readback required:
-Rollback plan:
-Next checkpoint:
-```
-
----
-
-## Relation to Progressive B Discovery
-
-Safe Agent Box pairs well with Progressive B Discovery.
-
-```text
-Progressive B Discovery asks:
-Where are we going, and how does B become clearer through runtime?
-
-Safe Agent Box asks:
-What can the agent safely do while helping us move toward B?
-```
-
-Together:
-
-```text
-Progressive B Discovery helps direction.
-Safe Agent Box helps controlled execution.
 ```
 
 ---
@@ -189,23 +111,23 @@ README.md
 docs/quick-start.md
 → first safe loop in 5–10 minutes
 
-prompts/safe-agent-box-prompt.md
-→ copyable prompt for using an AI agent inside a safe box
+docs/codex-for-oss-trial.md
+→ Codex-style maintainer trial workflow
 
-templates/safe-agent-box-template.md
-→ full box definition template
+docs/maintainer-workflow.md
+→ issue, pull request, and release-note workflow boxes
 
-templates/human-gate-template.md
-→ approval gate template
+examples/
+→ practical Safe Agent Box examples
 
-templates/readback-template.md
-→ post-run report template
+prompts/
+→ copyable prompts for bounded agent work
 
-templates/permission-levels.md
-→ permission level reference
+templates/
+→ reusable box and readback templates
 
-examples/local-tooling-example.md
-→ simple example for local tool-building
+.github/
+→ issue and pull request templates
 ```
 
 ---
@@ -214,7 +136,7 @@ examples/local-tooling-example.md
 
 1. Open `templates/safe-agent-box-template.md`.
 2. Fill in the goal, workspace, permission level, allowed paths, blocked paths, and readback requirement.
-3. Give the prompt in `prompts/safe-agent-box-prompt.md` to your AI agent.
+3. Give the prompt in `prompts/safe-agent-box-prompt.md` or `prompts/codex-pr-review-box.md` to your AI agent.
 4. Start at Level 1 or Level 2.
 5. Only raise permission after readback is clean.
 
